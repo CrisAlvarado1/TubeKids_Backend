@@ -13,6 +13,12 @@ dbConnect();
 // Apply middlewares
 applyMiddleware(app);
 
+// Import routes
+const userRoutes = require('./routes/userRoutes.js');
+
+// Implements routes
+app.use('/tubekids', userRoutes);
+
 // Listen on port
 const PORT = process.env.PORT;
 app.listen(PORT, () => console.log(`TubeKids Rest Api listening on port ${PORT}!`));
