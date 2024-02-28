@@ -18,9 +18,9 @@ const userSchema = new Schema({
         type: Date,
         required: true,
         validate: {
-            validator: function (value) {
+            validator: function (date) {
                 // Validate the format of the email
-                const age = Math.floor((new Date() - new Date(value)) / (1000 * 60 * 60 * 24 * 365));
+                const age = Math.floor((new Date() - new Date(date)) / (1000 * 60 * 60 * 24 * 365));
                 return age >= 18;
             },
             message: 'You must be at least 18 years old to register.'
