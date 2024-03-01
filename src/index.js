@@ -16,10 +16,12 @@ applyMiddleware(app);
 // Import routes
 const userRoutes = require('./routes/userRoutes.js');
 const videoRoutes = require('./routes/videoRoutes.js');
+const userRestrictedRoutes = require('./routes/restrictedUserRoutes.js');
 
 // Implements routes
 app.use('/tubekids', userRoutes);
 app.use('/tubekids', videoRoutes);
+app.use('/tubekids', userRestrictedRoutes);
 
 // Listen on port
 const PORT = process.env.PORT;
