@@ -3,9 +3,18 @@ const Schema = mongoose.Schema;
 
 const restrictedUserSchema = new Schema({
     fullName: { type: String, required: true },
-    pin: { type: Number, required: true, minlength: 6, maxlength: 6, message: "Invalid Pin" },
+    pin: {
+        type: String,
+        required: true,
+        validate: {
+            validator: function (pin) {
+                return /^\d{6}$/.test(pin.toString());
+            },
+            message: 'Pin must be a 6-digit number'
+        }
+    },
     avatar: { type: String, required: true }, // Save url of the Avatar
-    age: {type: Number},
+    age: { type: Number },
     userId: { type: Schema.Types.ObjectId, ref: 'User', required: true }
 });
 

@@ -1,17 +1,18 @@
 // Import all dependencies of the project
 require('dotenv').config();
 const express = require('express');
-const { dbConnect } = require('./db/index');
-const { applyMiddleware } = require('./middleware/index');
+const { dbConnect } = require('./db/connection.js');
+const { applyBodyParser, applyCors } = require('./middleware/index.js');
 
 // Initialize Express application instance
 const app = express();
 
 // Connect to the database
-dbConnect();
+dbConnect(); 
 
 // Apply middlewares
-applyMiddleware(app);
+applyBodyParser(app);
+applyCors(app);
 
 // Import routes
 const userRoutes = require('./routes/userRoutes.js');

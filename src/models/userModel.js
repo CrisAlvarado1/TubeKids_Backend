@@ -9,7 +9,16 @@ const userSchema = new Schema({
         message: 'Invalid format of the email'
     },
     password: { type: String, required: true },
-    pin: { type: Number, required: true, min: 100000, max: 999999, message: "Invalid Pin"},
+    pin: {
+        type: String,
+        required: true,
+        validate: {
+            validator: function (pin) {
+                return /^\d{6}$/.test(pin.toString());
+            },
+            message: 'Pin must be a 6-digit number'
+        }
+    },
     name: { type: String, required: true },
     surname: { type: String, required: true },
     secondSurname: { type: String, required: true },
@@ -28,4 +37,4 @@ const userSchema = new Schema({
     }
 });
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model('User', userSchema); 
