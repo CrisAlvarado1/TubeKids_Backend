@@ -1,4 +1,5 @@
 const Video = require('../models/videoModel.js');
+const User = require('../models/userModel.js');
 const baseController = require('../controllers/baseController.js')
 
 /**
@@ -16,6 +17,19 @@ const setVideoData = (video, req) => {
     return video;
 }
 
+/**
+ * Add the video to the array of videos on the specific user
+ * 
+ * @param videoId - ID of the new video record.
+ * @param userId - ID of the principal user.
+ */
+const addVideoToUser = async (videoId, userId) => {
+    try {
+        await User.findByIdAndUpdate(userId, { $push: { videos: videoId } })
+    } catch (error) {
+        console.log('Error while associating video with user');
+    }
+}
 
 /**
  * Creates a new video record
@@ -24,9 +38,21 @@ const setVideoData = (video, req) => {
  * @param {*} res - Response object
  */
 const videoPost = async (req, res) => {
-    let video = new Video();
-    video = setVideoData(video, req);
-    baseController.create(video, res, 'video');
+    try {
+        const userId = req.query.id;
+        if (userId) {
+            // Add a new video
+            let video = new Video();
+            video = setVideoData(video, req);
+            await baseController.create(video, res, 'video');
+
+            // Add the new record of video to the principal user
+            const videoId = video._id;
+            await addVideoToUser(videoId, userId);
+        }
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
 }
 
 /**
@@ -54,13 +80,34 @@ const videoPut = async (req, res) => {
 }
 
 /**
+ * Removes a video from a user's video array.
+ * 
+ * @param {*} videoId - ID of the video to delete
+ * @param {*} userId - ID of principal User
+ */
+const removeVideoFromUser = async (videoId, userId) => {
+    try {
+        await User.findByIdAndUpdate(userId, { $pull: { videos: videoId } });
+    } catch (error) {
+        console.log('Error while removing video from user');
+    }
+}
+
+/**
  * Deletes a specific video
  * 
  * @param {*} req - Request object
  * @param {*} res - Response object
  */
 const videoDelete = async (req, res) => {
-    baseController.deleteModel(Video, req, res, 'restrictedUser')
+    try {
+        const videoId = req.query.id;
+        const userId = req.query.userId;
+        await removeVideoFromUser(videoId, userId);
+        await baseController.deleteModel(Video, req, res, 'video');
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
 }
 
 // Export the functions of this controller

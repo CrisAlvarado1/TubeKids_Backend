@@ -1,5 +1,5 @@
-const baseController = require('../controllers/baseController.js');
 const RestrictedUser = require('../models/restrictedUserModel.js');
+const baseController = require('../controllers/baseController.js');
 
 /**
  * Extracts restricted user data from the request body and sets it in an restricted user object.

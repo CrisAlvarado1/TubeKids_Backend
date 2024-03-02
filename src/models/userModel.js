@@ -34,7 +34,8 @@ const userSchema = new Schema({
             },
             message: 'You must be at least 18 years old to register.'
         }
-    }
+    },
+    videos: [{ type: Schema.Types.ObjectId, ref: 'Video' }]
 });
 
 module.exports = mongoose.model('User', userSchema); 

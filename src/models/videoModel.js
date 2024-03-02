@@ -14,8 +14,7 @@ const videoSchema = new Schema({
             },
             message: 'You must add the link with a correct format.'
         }
-    },
-    userId: { type: Schema.Types.ObjectId, ref: 'User', required: true }
+    }
 });
 
 module.exports = mongoose.model('Video', videoSchema);
