@@ -14,12 +14,11 @@ const setRestrictedUserData = (restrictedUser, req) => {
     restrictedUser.avatar = req.body.avatar;
     restrictedUser.age = req.body.age;
     restrictedUser.userId = req.body.userId;
-
     return restrictedUser;
-}
+};
 
 /**
- * Creates a new restricted user `/tubekids/restricted_user/?id=${data.id}`
+ * Creates a new restricted user
  * 
  * @param {*} req - Request object
  * @param {*} res - Response object
@@ -28,7 +27,35 @@ const restrictedUserPost = (req, res) => {
     let restrictedUser = new RestrictedUser();
     restrictedUser = setRestrictedUserData(restrictedUser, req);
     baseController.create(restrictedUser, res, 'restrictedUser');
-}
+};
+
+/**
+ * Retrieve all model objects filtered by the userId.
+ * 
+ * @param {Model} Model - The model to query.
+ * @param {*} res - Response object
+ * @param {*} req - Request object
+ */
+const getByUserId = async (req, res) => {
+    try {
+        const userId = req.query.userId;
+        if (!userId) {
+            res.status(404).json({ error: "User ID is required" });
+            return;
+        }
+
+        const data = await RestrictedUser.find({ userId });
+        if (data.length === 0) {
+            res.status(404).json({ error: "No data found for the user ID provided" });
+            return;
+        }
+
+        res.json(data);
+    } catch (error) {
+        console.error('Error while querying the model by user ID', error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+};
 
 /**
  * Get specific restricted users if an principal user ID is provided.
@@ -40,9 +67,9 @@ const userRestrictedGet = (req, res) => {
     if (req.query && req.query.id) {
         baseController.getById(RestrictedUser, req, res);
     } else if (req.query && req.query.userId) {
-        baseController.getByUserId(RestrictedUser, req, res)
+        getByUserId(req, res)
     }
-}
+};
 
 /** Update a restricted user by ID.
 * 
@@ -51,7 +78,7 @@ const userRestrictedGet = (req, res) => {
 */
 const restrictedUserPut = (req, res) => {
     baseController.update(RestrictedUser, req, res);
-}
+};
 
 /**
  * Deletes a specific restricted user
@@ -61,7 +88,7 @@ const restrictedUserPut = (req, res) => {
  */
 const restrictedUserDelete = (req, res) => {
     baseController.deleteModel(RestrictedUser, req, res, 'restrictedUser')
-}
+};
 
 
 // Export the functions of this controller
@@ -70,4 +97,4 @@ module.exports = {
     userRestrictedGet,
     restrictedUserDelete,
     restrictedUserPut
-}
+};

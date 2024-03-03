@@ -17,9 +17,8 @@ const setUserData = (user, req) => {
     user.secondSurname = req.body.secondSurname;
     user.country = req.body.country;
     user.birthdate = req.body.birthdate;
-
     return user;
-}
+};
 
 /**
  * Creates a new principal user
@@ -31,7 +30,7 @@ const userPost = async (req, res) => {
     let user = new User();
     user = setUserData(user, req);
     baseController.create(user, res, 'user');
-}
+};
 
 /**
  * Get specific user if an ID is provided, otherwise, get all users.
@@ -45,7 +44,7 @@ const userGet = (req, res) => {
     } else {
         baseController.getAll(User, req, res)
     }
-}
+};
 
 /**
  * Updates a specific user
@@ -55,7 +54,7 @@ const userGet = (req, res) => {
  */
 const userPut = async (req, res) => {
     baseController.update(User, req, res);
-}
+};
 
 /**
  * Deletes a specific user
@@ -65,7 +64,7 @@ const userPut = async (req, res) => {
  */
 const userDelete = async (req, res) => {
     baseController.deleteModel(User, req, res, 'user')
-}
+};
 
 
 // Export the functions of this controller
@@ -74,4 +73,4 @@ module.exports = {
     userGet,
     userPut,
     userDelete
-}
+};
