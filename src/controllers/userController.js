@@ -38,18 +38,12 @@ const userPost = async (req, res) => {
  * @param {*} req - Request object
  * @param {*} res - Response object
  */
-const searchUserGet = async (req, res) => {
-  let email = req.query.email;
-  let password = req.query.password;
+const searchUserGet = async (email, password) => {
   try {
     const data = await User.find({ email, password });
-    if (!data) {
-      res.status(404).json({error: "User with the requested credentials not found"})
-    }
-    res.status(200).json(data);
+    return data;
   } catch (error) {
     console.error("Error while querying all models", error);
-    res.status(500).json({ error: "Internal server error" });
   }
 };
 
@@ -62,38 +56,14 @@ const searchUserGet = async (req, res) => {
 const userGet = (req, res) => {
   if (req.query && req.query.id) {
     baseController.getById(User, req, res);
-  } else if (req.query.email && req.query.password) {
-    searchUserGet(req, res);
   } else {
     baseController.getAll(User, req, res);
   }
-};
-
-/**
- * Updates a specific user
- *
- * @param {*} req - Request object
- * @param {*} res - Response object
- */
-const userPut = async (req, res) => {
-  baseController.update(User, req, res);
-};
-
-/**
- * Deletes a specific user
- *
- * @param {*} req - Request object
- * @param {*} res - Response object
- */
-const userDelete = async (req, res) => {
-  baseController.deleteModel(User, req, res, "user");
 };
 
 // Export the functions of this controller
 module.exports = {
   userPost,
   userGet,
-  userPut,
-  userDelete,
   searchUserGet,
 };

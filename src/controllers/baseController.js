@@ -9,7 +9,7 @@ const create = async (Model, res, modelName) => {
   try {
     const data = await Model.save();
     res.header({
-      location: `/tubekids/${modelName}/?id=${data.id}`,
+      location: `/api/tubekids/${modelName}/?id=${data.id}`,
     });
     res.status(201).json(data);
   } catch (error) {
