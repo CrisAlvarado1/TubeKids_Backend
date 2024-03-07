@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const {
-    userPost, userGet, userPut, userDelete
+    userPost, userGet, userPut, userDelete, searchUserGet
 } = require('../controllers/userController.js');
 
 router.get('/user', userGet);
