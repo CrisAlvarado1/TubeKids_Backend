@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 const theSecretKey = process.env.JWT_SECRET_KEY;
 
-const { searchUserGet } = require("../controllers/userController.js");
+const { searchUser } = require("../controllers/userController.js");
 
 /**
  * Creates a JWT token for the provided user credentials and sends it as a response.
@@ -9,15 +9,16 @@ const { searchUserGet } = require("../controllers/userController.js");
  * @param {Object} req - The request object.
  * @param {Object} res - The response object.
  */
-const createToken = (req, res) => {
+const createToken = async (req, res) => {
   if (req.body.email && req.body.password) {
-    let user = searchUserGet(req.body.email, req.body.password);
-    if (user) {
+    let user = await searchUser(req.body.email);
+    if (user && user.password === req.body.password) {
       const token = jwt.sign(
         {
-          id: user.id,
-          name: user.name,
-          permission: ["create", "edit", "delete"],
+          id: user._id,
+          email: user.email,
+          password: user.password,
+          permission: ["create", "edit", "delete", "query"],
         },
         theSecretKey
       );
@@ -30,6 +31,7 @@ const createToken = (req, res) => {
   }
 };
 
+// Export the function create token
 module.exports = {
   createToken,
 };

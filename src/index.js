@@ -14,8 +14,6 @@ dbConnect();
 applyBodyParser(app);
 applyCors(app);
 
-const { searchUserGet } = require("./controllers/userController.js");
-
 // Import and implements routes for the user actions before middleware auth
 const userRoutes = require("./routes/userRoutes.js");
 app.use("/api/tubekids", userRoutes);

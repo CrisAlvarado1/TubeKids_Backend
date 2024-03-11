@@ -37,11 +37,12 @@ const userPost = async (req, res) => {
  *
  * @param {*} req - Request object
  * @param {*} res - Response object
+ * @returns {User} user - Object with the specific user information
  */
-const searchUserGet = async (email, password) => {
+const searchUser = async (email) => {
   try {
-    const data = await User.find({ email, password });
-    return data;
+    let user = await User.findOne({ email: email });
+    return user;
   } catch (error) {
     console.error("Error while querying all models", error);
   }
@@ -65,5 +66,5 @@ const userGet = (req, res) => {
 module.exports = {
   userPost,
   userGet,
-  searchUserGet,
+  searchUser,
 };

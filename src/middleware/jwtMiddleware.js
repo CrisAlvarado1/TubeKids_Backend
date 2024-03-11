@@ -18,18 +18,16 @@ const jwtMiddleware = (req, res, next) => {
             error: "Unauthorized",
           });
         }
-        console.log("Welcome", decodedToken.name);
+        console.log(decodedToken.name + " " + decodedToken.password + " " + decodedToken._id);
         next();
       });
     } catch (e) {
-      res.status(401);
-      res.send({
+      res.status(401).json({
         error: "Unauthorized ",
       });
     }
   } else {
-    res.status(401);
-    res.send({
+    res.status(401).json({
       error: "Unauthorized ",
     });
   }
