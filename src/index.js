@@ -14,9 +14,9 @@ dbConnect();
 applyBodyParser(app);
 applyCors(app);
 
-// Import and implements routes for the user actions before middleware auth
-const userRoutes = require("./routes/userRoutes.js");
-app.use("/api/tubekids", userRoutes);
+// Implements routes for create user before middleware auth
+const userController = require("./controllers/userController.js");
+app.use("/api/tubekids/user", userController.userPost);
 
 // Login with JWT (Route)
 const sessionRoutes = require("./routes/sessionRoutes.js");
@@ -27,12 +27,14 @@ const jwtMiddleware = require("./middleware/jwtMiddleware.js");
 app.use(jwtMiddleware);
 
 // Import routes of videos and user restricted
+const userRoutes = require("./routes/userRoutes.js");
 const videoRoutes = require("./routes/videoRoutes.js");
 const userRestrictedRoutes = require("./routes/restrictedUserRoutes.js");
 
 // Implements routes
 app.use("/api/tubekids", videoRoutes);
 app.use("/api/tubekids", userRestrictedRoutes);
+app.use("/api/tubekids", userRoutes);
 
 // Listen on port
 const PORT = process.env.PORT;

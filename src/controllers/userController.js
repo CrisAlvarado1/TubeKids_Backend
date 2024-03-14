@@ -55,11 +55,8 @@ const searchUser = async (email) => {
  * @param {*} res - Response object
  */
 const userGet = (req, res) => {
-  if (req.query && req.query.id) {
-    baseController.getById(User, req, res);
-  } else {
-    baseController.getAll(User, req, res);
-  }
+  req.query.id = req._id;
+  baseController.getById(User, req, res);
 };
 
 // Export the functions of this controller

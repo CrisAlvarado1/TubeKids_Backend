@@ -18,7 +18,7 @@ const jwtMiddleware = (req, res, next) => {
             error: "Unauthorized",
           });
         }
-        console.log(decodedToken.name + " " + decodedToken.password + " " + decodedToken._id);
+        req._id = decodedToken.id;
         next();
       });
     } catch (e) {

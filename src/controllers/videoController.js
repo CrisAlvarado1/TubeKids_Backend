@@ -37,7 +37,7 @@ const addVideoToUser = async (videoId, userId) => {
  */
 const videoPost = async (req, res) => {
   try {
-    const userId = req.body.userId;
+    const userId = req._id;
     if (userId) {
       // Add a new video
       let video = new Video();
@@ -63,7 +63,7 @@ const videoPost = async (req, res) => {
  */
 const getVideosByUser = async (req, res) => {
   try {
-    const user = await User.findById(req.query.userId).populate("videos");
+    const user = await User.findById(req._id).populate("videos");
     if (!user) {
       res.status(404).json({ error: "No data found for the user ID provided" });
       console.log("User not found for search the related videos");
@@ -83,7 +83,7 @@ const getVideosByUser = async (req, res) => {
 const videoGet = (req, res) => {
   if (req.query && req.query.id) {
     baseController.getById(Video, req, res);
-  } else if (req.query && req.query.userId) {
+  } else if (req._id) {
     getVideosByUser(req, res);
   }
 };
@@ -121,7 +121,7 @@ const removeVideoFromUser = async (videoId, userId) => {
 const videoDelete = async (req, res) => {
   try {
     const videoId = req.query.id;
-    const userId = req.query.userId;
+    const userId = req._id;
     await removeVideoFromUser(videoId, userId);
     await baseController.deleteModel(Video, req, res, "video");
   } catch (error) {

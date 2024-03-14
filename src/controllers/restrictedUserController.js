@@ -38,7 +38,7 @@ const restrictedUserPost = (req, res) => {
  */
 const getByUserId = async (req, res) => {
   try {
-    const userId = req.query.userId;
+    const userId = req._id;
     if (!userId) {
       res.status(404).json({ error: "User ID is required" });
       return;
@@ -66,7 +66,7 @@ const getByUserId = async (req, res) => {
 const userRestrictedGet = (req, res) => {
   if (req.query && req.query.id) {
     baseController.getById(RestrictedUser, req, res);
-  } else if (req.query && req.query.userId) {
+  } else if (req._id) {
     getByUserId(req, res);
   }
 };
