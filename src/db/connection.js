@@ -1,6 +1,10 @@
 const mongoose = require("mongoose");
 
-// Function to connect to the database
+/**
+ * Connects to the MongoDB database using the provided connection string.
+ * 
+ * @returns {Promise<void>} A promise that resolves once the connection is successful or rejects if there's an error.
+ */
 const dbConnect = async () => {
   try {
     const mongoConnectionString = process.env.DB_CONNECTION_STRING;

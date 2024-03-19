@@ -1,12 +1,20 @@
 const bodyParser = require("body-parser");
 const cors = require("cors");
 
-// Parser for the request body to JSON format (required for the POST and PUT methods)
+/**
+ * Applies body parser middleware to parse incoming request bodies as JSON.
+ *
+ * @param {Object} app - The Express application instance.
+ */
 const applyBodyParser = (app) => {
   app.use(bodyParser.json());
 };
 
-// CORS
+/**
+ * Applies CORS middleware to allow cross-origin requests.
+ *
+ * @param {Object} app - The Express application instance.
+ */
 const applyCors = (app) => {
   app.use(
     cors({
