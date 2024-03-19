@@ -39,5 +39,5 @@ app.use("/api/tubekids", userRoutes);
 // Listen on port
 const PORT = process.env.PORT;
 app.listen(PORT, () =>
-  console.log(`TubeKids Rest Api listening on port ${PORT}!`)
+  console.log(`Start TubeKids Rest Api!`)
 );

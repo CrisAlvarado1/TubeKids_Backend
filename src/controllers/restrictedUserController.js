@@ -13,7 +13,7 @@ const setRestrictedUserData = (restrictedUser, req) => {
   restrictedUser.pin = req.body.pin;
   restrictedUser.avatar = req.body.avatar;
   restrictedUser.age = req.body.age;
-  restrictedUser.userId = req.body.userId;
+  restrictedUser.userId = req._id;
   return restrictedUser;
 };
 
@@ -45,12 +45,7 @@ const getByUserId = async (req, res) => {
     }
 
     const data = await RestrictedUser.find({ userId });
-    if (data.length === 0) {
-      res.status(404).json({ error: "No data found for the user ID provided" });
-      return;
-    }
-
-    res.json(data);
+    res.status(200).json(data);
   } catch (error) {
     console.error("Error while querying the model by user ID", error);
     res.status(500).json({ error: "Internal server error" });

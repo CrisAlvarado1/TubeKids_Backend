@@ -1,0 +1,536 @@
+{
+	"info": {
+		"_postman_id": "3e263032-4b65-47f2-bac0-6065a7bb5da9",
+		"name": "TubeKids",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32524631"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Create User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"Armando@gmail.com\",\r\n    \"password\" : \"12345678\",\r\n    \"pin\": \"098712\",\r\n    \"name\": \"Armando\",\r\n    \"surname\": \"Alvarado\",\r\n    \"secondSurname\": \"Carmona\",\r\n    \"country\": \"CRC\",\r\n    \"birthdate\": \"04/02/2004\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/tubekids/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"tubekids",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/api/tubekids/userInfo/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"tubekids",
+								"userInfo",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Endpoints related to user management."
+		},
+		{
+			"name": "Video",
+			"item": [
+				{
+					"name": "Create Video",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"JUGAMOS Con BARTOLITO Y LA VACA LOLA\",\r\n    \"url\": \"https://www.youtube.com/watch?v=z_ThUwqoStU&ab_channel=ElReinoaJugar\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/tubekids/video/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"tubekids",
+								"video",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get video",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3001/api/tubekids/video/?id=65f363e9b50c36627224c4ca",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"tubekids",
+								"video",
+								""
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "65f363e9b50c36627224c4ca"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Playlist",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/api/tubekids/video/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"tubekids",
+								"video",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update video",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"JUGAMOS Con BARTOLITO Y LA VACA LOLA LOLA\",\r\n    \"url\": \"https://www.youtube.com/watch?v=4ShOpJPHRxA&t=25s&ab_channel=ElReinoInfantil\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/tubekids/video/?id=65f363e9b50c36627224c4ca",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"tubekids",
+								"video",
+								""
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "65f363e9b50c36627224c4ca"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete video",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/api/tubekids/video/?id=65f35ace1572e07266df4307",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"tubekids",
+								"video",
+								""
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "65f35ace1572e07266df4307"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Endpoints related to video management."
+		},
+		{
+			"name": "Restricted User",
+			"item": [
+				{
+					"name": "Create restricted user",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"fullName\": \"Cristopher\",\r\n    \"pin\": \"123456\",\r\n    \"avatar\": \"Avatar 1\",\r\n    \"age\": 10,\r\n    \"userId\": \"65de4bbcc6e2a2a543c49f48\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/tubekids/restrictedUser/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"tubekids",
+								"restrictedUser",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get restricted user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/api/tubekids/restrictedUser/?id=65f718d5a457750509fe48c1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"tubekids",
+								"restrictedUser",
+								""
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "65f718d5a457750509fe48c1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get restricted user by user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/api/tubekids/restrictedUser/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"tubekids",
+								"restrictedUser",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete restricted user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/api/tubekids/restrictedUser/?id=65ea1c0a87f5cb6ffec63f7b",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"tubekids",
+								"restrictedUser",
+								""
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "65ea1c0a87f5cb6ffec63f7b"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update restricted user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"fullName\": \"Armando Carmona\",\r\n    \"pin\": \"112233\",\r\n    \"avatar\": \"Avatar 2\",\r\n    \"age\": 11,\r\n    \"userId\": \"65de4bbcc6e2a2a543c49f48\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/tubekids/restrictedUser/?id=65ea5786f133cb76a2a4c804",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"tubekids",
+								"restrictedUser",
+								""
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "65ea5786f133cb76a2a4c804"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Endpoints related to restricted user management."
+		},
+		{
+			"name": "Session",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"Cris@gmail.com\",\r\n    \"password\": \"12345678\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/tubekids/session",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"tubekids",
+								"session"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Endpoint for create the token session."
+		}
+	]
+}
