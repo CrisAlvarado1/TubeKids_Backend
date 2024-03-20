@@ -72,6 +72,7 @@ const userRestrictedGet = (req, res) => {
  * @param {*} res - Response object
  */
 const restrictedUserPut = (req, res) => {
+  req.body.userId = req._id;
   baseController.update(RestrictedUser, req, res);
 };
 

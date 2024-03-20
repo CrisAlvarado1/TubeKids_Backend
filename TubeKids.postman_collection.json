@@ -463,7 +463,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"fullName\": \"Armando Carmona\",\r\n    \"pin\": \"112233\",\r\n    \"avatar\": \"Avatar 2\",\r\n    \"age\": 11,\r\n    \"userId\": \"65de4bbcc6e2a2a543c49f48\"\r\n}",
+							"raw": "{\r\n    \"fullName\": \"Armando Carmona\",\r\n    \"pin\": \"112233\",\r\n    \"avatar\": \"/img/avatars/Avatar1.jpg\",\r\n    \"age\": 11,\r\n }",
 							"options": {
 								"raw": {
 									"language": "json"
