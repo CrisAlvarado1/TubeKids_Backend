@@ -1,3 +1,24 @@
+const mongoose = require("mongoose");
+
+/**
+ * Handles errors that occur during the saving process.
+ *
+ * @param {Error} error - The error object.
+ * @param {Object} res - The response object to send the error response.
+ */
+const handleSaveError = (error, res) => {
+  if (error.code === 11000 && error.keyPattern.email) {
+    res.status(409).json({ error: "Email already exists" });
+  } else if (error instanceof mongoose.Error.ValidationError) {
+    res
+      .status(422)
+      .json({ error: "Validation error: Please check your request data" });
+  } else {
+    console.error(`Error while saving the new resource`, error);
+    res.status(500).json({ error: `Error while saving the new resource` });
+  }
+};
+
 /**
  * Saves a new object of the specified model to the database.
  *
@@ -13,8 +34,7 @@ const create = async (Model, res, modelName) => {
     });
     res.status(201).json(data);
   } catch (error) {
-    console.error(`Error while saving the ${modelName}`, error);
-    res.status(500).json({ error: `Error while saving the ${modelName}` });
+    handleSaveError(error, res);
   }
 };
 
@@ -121,8 +141,7 @@ const update = async (Model, req, res) => {
 
     res.status(200).json(updatedModel);
   } catch (error) {
-    console.error("Error while updating the model", error);
-    res.status(500).json({ error: "There was an error updating the model" });
+    handleSaveError(error, res);
   }
 };
 
